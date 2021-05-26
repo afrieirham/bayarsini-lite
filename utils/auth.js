@@ -1,6 +1,7 @@
 import Router from 'next/router'
 import React, { useState, useEffect, useContext, createContext } from 'react'
 import firebase from '@lib/firebase'
+import { getFirestoreUser, saveUser } from './db'
 
 // Create authContext
 const authContext = createContext()
@@ -25,8 +26,15 @@ function useAuthProvider() {
   const handleUser = async (rawUser) => {
     if (rawUser) {
       const user = await formatUser(rawUser)
+      const { token, ...userForFirestore } = user
 
-      setUser(user)
+      // Save user info to db
+      saveUser(userForFirestore)
+
+      // Get extra user details to store in auth state
+      const { storeName } = await getFirestoreUser(user.uid)
+
+      setUser({ ...user, storeName })
       return user
     } else {
       setUser(false)

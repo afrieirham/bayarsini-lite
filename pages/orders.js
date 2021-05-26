@@ -1,13 +1,13 @@
 import React from 'react'
 import useSWR from 'swr'
 import { Flex, Text } from '@chakra-ui/react'
-// import { Plus } from 'react-feather'
+import { Plus } from 'react-feather'
 
 import { useAuth } from 'utils/auth'
 import fetcher from 'utils/fetcher'
 import DashboardShell from 'components/DashboardShell'
 // import OrderRow from 'components/OrderRow'
-// import AddOrderButton from 'components/AddOrderButton'
+import AddOrderButton from 'components/AddOrderButton'
 // import MyOrderEmptyState from 'components/MyOrderEmptyState'
 // import MyOrderSkeleton from 'components/MyOrderSkeleton'
 
@@ -30,9 +30,9 @@ export default function Orders() {
           bottom='0'
           zIndex='sticky'
         >
-          {/* <AddOrderButton borderRadius='50px' leftIcon={<Plus size='15' />}>
+          <AddOrderButton borderRadius='50px' leftIcon={<Plus size='15' />}>
             New Order
-          </AddOrderButton> */}
+          </AddOrderButton>
         </Flex>
 
         {/* {data.orders.map((order) => (
