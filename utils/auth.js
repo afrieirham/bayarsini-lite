@@ -1,3 +1,4 @@
+import Router from 'next/router'
 import React, { useState, useEffect, useContext, createContext } from 'react'
 import firebase from '@lib/firebase'
 
@@ -34,10 +35,18 @@ function useAuthProvider() {
   }
 
   const signInWithGoogle = () => {
+    return firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+  }
+
+  const getRedirectResult = () => {
     return firebase
       .auth()
-      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then((response) => handleUser(response.user))
+      .getRedirectResult()
+      .then((result) => {
+        if (result.user) {
+          Router.push('/orders')
+        }
+      })
   }
 
   const signOut = () => {
@@ -56,8 +65,9 @@ function useAuthProvider() {
 
   return {
     user,
-    signInWithGoogle,
     signOut,
+    signInWithGoogle,
+    getRedirectResult,
   }
 }
 
