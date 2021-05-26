@@ -15,3 +15,16 @@ export async function getUserOrders(uid) {
 
   return { orders: sortedOrders }
 }
+
+export async function getOrder(orderId, ownerId) {
+  const doc = await db.collection('orders').doc(orderId).get()
+
+  // Handle public request
+  if (!ownerId) {
+    const { customer: _, ...publicOrder } = { id: doc.id, ...doc.data() }
+    return { order: publicOrder }
+  }
+
+  const order = { id: doc.id, ...doc.data() }
+  return { order }
+}
