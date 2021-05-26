@@ -16,12 +16,14 @@
     "firebase": "^8.6.2",
     "firebase-admin": "^9.8.0",
     "framer-motion": "^4",
+    "multer": "^1.4.2",
     "nanoid": "^3.1.23",
     "next": "10.x",
     "react": "17.x",
     "react-dom": "17.x",
     "react-feather": "^2.0.9",
     "react-hook-form": "^7.6.7",
+    "store": "^2.0.12",
     "swr": "^0.5.6"
   }
 }
