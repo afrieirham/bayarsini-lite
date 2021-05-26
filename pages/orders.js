@@ -6,18 +6,17 @@ import { Plus } from 'react-feather'
 import { useAuth } from 'utils/auth'
 import fetcher from 'utils/fetcher'
 import DashboardShell from 'components/DashboardShell'
-// import OrderRow from 'components/OrderRow'
+import OrderRow from 'components/OrderRow'
 import AddOrderButton from 'components/AddOrderButton'
-// import MyOrderEmptyState from 'components/MyOrderEmptyState'
-// import MyOrderSkeleton from 'components/MyOrderSkeleton'
+import MyOrderEmptyState from 'components/MyOrderEmptyState'
+import MyOrderSkeleton from 'components/MyOrderSkeleton'
 
 export default function Orders() {
   const { user } = useAuth()
   const { data } = useSWR(user ? ['/api/orders', user.token] : null, fetcher)
 
-  // if (!data) return <MyOrderSkeleton />
-  // if (!user?.stripeRole) return <MyOrderEmptyState isFreeAccount />
-  // if (!data.orders.length) return <MyOrderEmptyState />
+  if (!data) return <MyOrderSkeleton />
+  if (!data.orders.length) return <MyOrderEmptyState />
 
   return (
     <DashboardShell title='My Orders'>
@@ -35,9 +34,9 @@ export default function Orders() {
           </AddOrderButton>
         </Flex>
 
-        {/* {data.orders.map((order) => (
+        {data.orders.map((order) => (
           <OrderRow key={order.id} {...order} />
-        ))} */}
+        ))}
         <Flex p={4} width='full' justifyContent='center'>
           <Text color='gray.500' fontSize='sm'>
             No more orders
