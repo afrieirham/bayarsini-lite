@@ -26,8 +26,8 @@ export function updateOrder(orderId, newValues) {
   return firestore.collection('orders').doc(orderId).update(newValues)
 }
 
-export function saveToyyibpay(userId, toyyibpay) {
-  return firestore.collection('users').doc(userId).update({ toyyibpay })
+export function updateUserProfile(userId, newValues) {
+  return firestore.collection('users').doc(userId).update(newValues)
 }
 
 export function updateStore(userId, storeName) {
