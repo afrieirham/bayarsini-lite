@@ -53,11 +53,11 @@ function UserPayment({ user }) {
           justifyContent='center'
           direction='column'
         >
-          <Avatar src={user.photoUrl} size='xl' />
+          <Avatar src={user?.photoUrl} size='xl' />
           <Heading mt={8} size='lg'>
-            {user.name}
+            {user?.name}
           </Heading>
-          <Text>@{user.username}</Text>
+          <Text>@{user?.username}</Text>
         </Flex>
         <Flex direction='column'>
           <Flex
