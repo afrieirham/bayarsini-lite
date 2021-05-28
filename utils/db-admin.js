@@ -28,3 +28,29 @@ export async function getOrder(orderId, ownerId) {
   const order = { id: doc.id, ...doc.data() }
   return { order }
 }
+
+export async function getUserByUsername(username) {
+  const query = await db.collection('users').where('username', '==', username).get()
+
+  const snapshot = query.docs[0]
+  const data = snapshot.data()
+
+  const user = { id: data.uid, ...data }
+
+  return { user }
+}
+
+export async function getAllUsers({ isActive }) {
+  const snapshot = await db.collection('users').where('isActive', '==', isActive).get()
+
+  const users = []
+  snapshot.forEach((doc) => {
+    users.push({ id: doc.id, ...doc.data() })
+  })
+
+  const sortedUsers = users.sort((a, b) =>
+    compareDesc(parseISO(a.createdAt), parseISO(b.createdAt)),
+  )
+
+  return { users: sortedUsers }
+}
