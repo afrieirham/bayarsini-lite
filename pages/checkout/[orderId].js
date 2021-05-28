@@ -4,28 +4,12 @@ import useSWR from 'swr'
 import fetcher from 'utils/fetcher'
 import PublicShell from 'components/PublicShell'
 import CustomerCheckout from 'components/CustomerCheckout'
-import { useEffect } from 'react'
-import { updateOrder } from '@utils/db'
 
 function Checkout() {
   const router = useRouter()
   const orderId = router.query.orderId
 
-  const { data, error, mutate } = useSWR(`/api/orders/${orderId}`, fetcher)
-
-  useEffect(() => {
-    const status = Number(router.query.status_id)
-    const hasCustomerData = Boolean(data?.order?.contact && data?.order?.shipping)
-
-    if (hasCustomerData && status === 1) {
-      const paymentInfo = {
-        status: 'paid',
-        paidAt: new Date().toISOString(),
-      }
-      updateOrder(orderId, paymentInfo)
-      mutate()
-    }
-  }, [router, data])
+  const { data, error } = useSWR(`/api/orders/${orderId}`, fetcher)
 
   if (!data) {
     return 'Loading...'
