@@ -32,9 +32,9 @@ function useAuthProvider() {
       saveUser(userForFirestore)
 
       // Get extra user details to store in auth state
-      const { storeName } = await getFirestoreUser(user.uid)
+      const { storeName, username } = await getFirestoreUser(user.uid)
 
-      setUser({ ...user, storeName })
+      setUser({ ...user, storeName, username })
       return user
     } else {
       setUser(false)
