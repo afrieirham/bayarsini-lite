@@ -65,3 +65,9 @@ export async function savePayment(payment) {
 export function updatePayment(paymentId, newValues) {
   return db.collection('payments').doc(paymentId).update(newValues)
 }
+
+export async function getPayment(paymentId) {
+  const doc = await db.collection('payments').doc(paymentId).get()
+  const payment = { id: doc.id, ...doc.data() }
+  return { payment }
+}

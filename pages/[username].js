@@ -50,6 +50,7 @@ function UserPayment({ user }) {
 
     const newPayment = {
       receiverId: uid,
+      receiverUsername: username,
       amount: Number(payment.amount),
       customerName: payment.customerName,
       customerPhone: payment.customerPhone,
