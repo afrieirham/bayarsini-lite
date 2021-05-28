@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 import { Divider, Flex, Text } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
-import { Image } from '@chakra-ui/image'
 
 import { useAuth } from '@utils/auth'
 import { GoogleIcon } from '@styles/icons'
@@ -39,7 +39,7 @@ export default function Home() {
         borderRadius='md'
         boxShadow='lg'
       >
-        <Image src='/logo.svg' height='60px' />
+        <Image src='/logo.svg' width={60} height={60} />
         <Text fontSize='xl' fontWeight='bold' textAlign='center' mt={2}>
           BayarSini
         </Text>

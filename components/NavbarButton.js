@@ -19,6 +19,7 @@ import {
 import { Home, Menu, User } from 'react-feather'
 
 import { useAuth } from '@utils/auth'
+import Logo from './Logo'
 
 function NavbarButton({ ...props }) {
   const { user } = useAuth()
@@ -29,7 +30,9 @@ function NavbarButton({ ...props }) {
       <Drawer isOpen={isOpen} placement='left' onClose={onClose} size='xs'>
         <DrawerOverlay>
           <DrawerContent>
-            <DrawerHeader>Bayar Sini</DrawerHeader>
+            <DrawerHeader>
+              <Logo mt={2} size={30} />
+            </DrawerHeader>
             <DrawerBody py={4}>
               <Divider mb={4} />
               <Flex direction='column'>
