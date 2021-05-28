@@ -54,3 +54,14 @@ export async function getAllUsers({ isActive }) {
 
   return { users: sortedUsers }
 }
+
+export async function savePayment(payment) {
+  const newPayment = db.collection('payments').doc()
+  newPayment.set(payment)
+
+  return newPayment
+}
+
+export function updatePayment(paymentId, newValues) {
+  return db.collection('payments').doc(paymentId).update(newValues)
+}

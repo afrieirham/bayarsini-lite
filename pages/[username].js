@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Flex, Heading, Text } from '@chakra-ui/layout'
@@ -6,6 +7,7 @@ import { Button } from '@chakra-ui/button'
 import { Input } from '@chakra-ui/input'
 import { Avatar } from '@chakra-ui/avatar'
 
+import { createBill } from '@utils/toyyibpay'
 import { getAllUsers, getUserByUsername } from '@utils/db-admin'
 import PublicShell from '@components/PublicShell'
 
@@ -36,9 +38,41 @@ export async function getStaticPaths() {
 
 function UserPayment({ user }) {
   const { handleSubmit, register } = useForm()
+  const [loading, setLoading] = useState(false)
 
-  const onSubmit = (data) => {
-    console.log(data)
+  if (!user) return null
+
+  const { uid, username, name, photoUrl } = user ? user : null
+
+  const onSubmit = async (payment) => {
+    setLoading(true)
+
+    const newPayment = {
+      receiverId: uid,
+      amount: Number(payment.amount),
+      customerName: payment.customerName,
+      customerPhone: payment.customerPhone,
+      customerEmail: payment.customerEmail,
+      createdAt: new Date().toISOString(),
+      status: 2, // 1 = success, 2 = pending, 3 = fail
+    }
+
+    // Create payment record
+    const { data } = await axios.post('/api/payment', { payment: newPayment })
+
+    // Create toyyibpay bill
+    const billCode = await createBill({
+      receiver: user,
+      payment: {
+        ...newPayment,
+        id: data.paymentId,
+      },
+    })
+
+    // Redirect customer to toyyibpayu payment portal
+    window.open(`${process.env.NEXT_PUBLIC_TOYYIBPAY_BASE_URL}/${billCode}`, '_parent')
+
+    setLoading(false)
   }
 
   return (
@@ -53,11 +87,11 @@ function UserPayment({ user }) {
           justifyContent='center'
           direction='column'
         >
-          <Avatar src={user?.photoUrl} size='xl' />
+          <Avatar src={photoUrl} size='xl' />
           <Heading mt={8} size='lg'>
-            {user?.name}
+            {name}
           </Heading>
-          <Text>@{user?.username}</Text>
+          <Text>@{username}</Text>
         </Flex>
         <Flex direction='column'>
           <Flex
@@ -101,9 +135,9 @@ function UserPayment({ user }) {
               <Input
                 placeholder='abdullah@example.com'
                 autoComplete='off'
-                name='email'
+                name='customerEmail'
                 type='email'
-                {...register('email', { required: true })}
+                {...register('customerEmail', { required: true })}
               />
             </FormControl>
             <FormControl mt={4}>
@@ -113,9 +147,9 @@ function UserPayment({ user }) {
               <Input
                 placeholder='012 123 1234'
                 autoComplete='off'
-                name='phone'
+                name='customerPhone'
                 type='tel'
-                {...register('phone', { required: true })}
+                {...register('customerPhone', { required: true })}
               />
             </FormControl>
             <Button
@@ -131,6 +165,7 @@ function UserPayment({ user }) {
               _hover={{ bg: 'gray.700' }}
               _focus={{ bg: 'gray.700' }}
               _active={{ bg: 'gray.800' }}
+              isLoading={loading}
             >
               Pay Now
             </Button>
