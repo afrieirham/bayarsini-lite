@@ -52,7 +52,7 @@ function useAuthProvider() {
       .getRedirectResult()
       .then((result) => {
         if (result.user) {
-          Router.push('/orders')
+          Router.push('/home')
         }
       })
   }
@@ -73,6 +73,7 @@ function useAuthProvider() {
 
   return {
     user,
+    setUser,
     signOut,
     signInWithGoogle,
     getRedirectResult,

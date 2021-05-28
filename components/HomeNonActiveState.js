@@ -22,7 +22,7 @@ import DashboardShell from './DashboardShell'
 function HomeNonActiveState() {
   const toast = useToast()
 
-  const { user } = useAuth()
+  const { user, setUser } = useAuth()
   const { handleSubmit, register } = useForm()
 
   const [loading, setLoading] = useState(false)
@@ -34,19 +34,21 @@ function HomeNonActiveState() {
     // Save user data into db
     updateUserProfile(user.uid, { username, toyyibpay })
 
-    // Alert user in UI
-    toast({
-      title: 'Congratulations! 🎉',
-      description: 'You can start requesting for money now.',
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-      variant: 'subtle',
-      position: 'top',
-    })
+    setTimeout(() => {
+      // Set username in user state
+      setUser({ ...user, username })
 
-    // Refresh page
-    setTimeout(() => location.reload(), 3000)
+      // Alert user in UI
+      toast({
+        title: 'Congratulations! 🎉',
+        description: 'You can start receiving money now.',
+        status: 'success',
+        duration: 6000,
+        isClosable: true,
+        variant: 'subtle',
+        position: 'top',
+      })
+    }, 1000)
   }
 
   return (

@@ -16,7 +16,7 @@ import {
   Stack,
   Divider,
 } from '@chakra-ui/react'
-import { Menu, Settings, ShoppingBag } from 'react-feather'
+import { Home, Menu, User } from 'react-feather'
 
 import { useAuth } from '@utils/auth'
 
@@ -44,14 +44,14 @@ function NavbarButton({ ...props }) {
                 </Flex>
                 <Divider my={4} />
                 <Stack direction='column' width='full' spacing={2}>
-                  <NextLink href='/orders' passHref>
+                  <NextLink href='/home' passHref>
                     <Button
                       size='sm'
                       variant='ghost'
                       justifyContent='flex-start'
-                      leftIcon={<ShoppingBag size='15' />}
+                      leftIcon={<Home size='15' />}
                     >
-                      Orders
+                      Home
                     </Button>
                   </NextLink>
                   <NextLink href='/settings' passHref>
@@ -59,9 +59,9 @@ function NavbarButton({ ...props }) {
                       size='sm'
                       variant='ghost'
                       justifyContent='flex-start'
-                      leftIcon={<Settings size='15' />}
+                      leftIcon={<User size='15' />}
                     >
-                      Settings
+                      Account
                     </Button>
                   </NextLink>
                 </Stack>
