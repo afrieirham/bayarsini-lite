@@ -3,13 +3,13 @@ import useSWR from 'swr'
 import { Flex, Text } from '@chakra-ui/react'
 import { Plus } from 'react-feather'
 
-import { useAuth } from 'utils/auth'
-import fetcher from 'utils/fetcher'
-import DashboardShell from 'components/DashboardShell'
-import OrderRow from 'components/OrderRow'
-import AddOrderButton from 'components/AddOrderButton'
-import MyOrderEmptyState from 'components/MyOrderEmptyState'
-import MyOrderSkeleton from 'components/MyOrderSkeleton'
+import { useAuth } from '@utils/auth'
+import fetcher from '@utils/fetcher'
+import DashboardShell from '@components/DashboardShell'
+import OrderRow from '@components/OrderRow'
+import AddOrderButton from '@components/AddOrderButton'
+import MyOrderEmptyState from '@components/MyOrderEmptyState'
+import MyOrderSkeleton from '@components/MyOrderSkeleton'
 
 export default function Orders() {
   const { user } = useAuth()

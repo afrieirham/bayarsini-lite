@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
-import { useAuth } from 'utils/auth'
-import fetcher from 'utils/fetcher'
-import DashboardShell from 'components/DashboardShell'
-import OwnerSingleOrder from 'components/OwnerSingleOrder'
+import { useAuth } from '@utils/auth'
+import fetcher from '@utils/fetcher'
+import DashboardShell from '@components/DashboardShell'
+import OwnerSingleOrder from '@components/OwnerSingleOrder'
 
 export default function SingleOrder() {
   const router = useRouter()

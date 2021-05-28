@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
-import fetcher from 'utils/fetcher'
-import PublicShell from 'components/PublicShell'
-import CustomerCheckout from 'components/CustomerCheckout'
+import fetcher from '@utils/fetcher'
+import PublicShell from '@components/PublicShell'
+import CustomerCheckout from '@components/CustomerCheckout'
 
 function Checkout() {
   const router = useRouter()

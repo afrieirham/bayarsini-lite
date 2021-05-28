@@ -5,7 +5,7 @@ import { IconButton } from '@chakra-ui/button'
 import { Flex, Heading, Stack, Text } from '@chakra-ui/layout'
 import { Table, Tbody, Td, Tr } from '@chakra-ui/table'
 import { Edit2 } from 'react-feather'
-import { useAuth } from 'utils/auth'
+import { useAuth } from '@utils/auth'
 
 function OrderDetailsCard({ name, description, amount, status, createdAt, paidAt, ownerId }) {
   const { user } = useAuth()
