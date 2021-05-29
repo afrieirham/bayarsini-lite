@@ -3,13 +3,12 @@ import { format, parseISO } from 'date-fns'
 import { Box, Button, Flex, Heading, Spacer, Stack, Text } from '@chakra-ui/react'
 
 import { useAuth } from '@utils/auth'
-import DashboardShell from './DashboardShell'
 import GetMyLinkButton from './GetMyLinkButton'
 
 function PaymentHistory({ payments, user }) {
   const { signOut } = useAuth()
   return (
-    <DashboardShell>
+    <>
       <Box maxWidth='450px' width='full' px={{ base: 4, sm: 0 }} py={8}>
         <Heading size='lg'>Welcome, {user.name}!</Heading>
       </Box>
@@ -60,7 +59,7 @@ function PaymentHistory({ payments, user }) {
           </Flex>
         ))}
       </Flex>
-    </DashboardShell>
+    </>
   )
 }
 

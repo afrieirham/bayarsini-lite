@@ -66,7 +66,7 @@ function HomeNonActiveState() {
   }
 
   return (
-    <DashboardShell title='Home'>
+    <DashboardShell>
       <Box maxWidth='450px' width='full' px={{ base: 4, sm: 0 }} py={8}>
         <Heading size='lg'>Welcome, {user?.name}!</Heading>
       </Box>

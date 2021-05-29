@@ -1,8 +1,11 @@
 import React from 'react'
 import useSWR from 'swr'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
+import { Flex } from '@chakra-ui/layout'
 
 import { useAuth } from '@utils/auth'
 import fetcher from '@utils/fetcher'
+import DashboardShell from '@components/DashboardShell'
 import HomeNonActiveState from '@components/HomeNonActiveState'
 import HomeEmptyState from '@components/HomeEmptyState'
 import PaymentHistory from '@components/PaymentHistory'
@@ -28,9 +31,32 @@ export default function Home() {
     return <HomeNonActiveState />
   }
 
-  if (!data.payments.length) {
-    return <HomeEmptyState />
-  }
+  const hasPaymentHistory = data.payments.length
 
-  return <PaymentHistory payments={data.payments} user={user} />
+  return (
+    <DashboardShell>
+      <Tabs width='full' colorScheme='gray.900' variant='line' p={0} isFitted={false} isLazy>
+        <TabList bg='white' as={Flex} justifyContent='center'>
+          <Tab textTransform='' fontSize='sm'>
+            Home
+          </Tab>
+          <Tab textTransform='' fontSize='sm'>
+            Settings
+          </Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel p={0} as={Flex} direction='column' alignItems='center'>
+            {hasPaymentHistory ? (
+              <PaymentHistory payments={data.payments} user={user} />
+            ) : (
+              <HomeEmptyState />
+            )}
+          </TabPanel>
+          <TabPanel>
+            <p>two!</p>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </DashboardShell>
+  )
 }

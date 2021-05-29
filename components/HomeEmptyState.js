@@ -2,14 +2,13 @@ import React from 'react'
 import { Box, Button, Flex, Heading, Text, useClipboard } from '@chakra-ui/react'
 
 import { useAuth } from '@utils/auth'
-import DashboardShell from './DashboardShell'
 import GetMyLinkButton from './GetMyLinkButton'
 
 export default function HomeEmptyState() {
   const { user, signOut } = useAuth()
 
   return (
-    <DashboardShell title='Home'>
+    <>
       <Box maxWidth='450px' width='full' px={{ base: 4, sm: 0 }} py={8}>
         <Heading size='lg'>Welcome, {user?.name}!</Heading>
       </Box>
@@ -32,6 +31,6 @@ export default function HomeEmptyState() {
           Logout
         </Button>
       </Flex>
-    </DashboardShell>
+    </>
   )
 }

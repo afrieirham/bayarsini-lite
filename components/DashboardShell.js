@@ -10,7 +10,7 @@ function DashboardShell({ children }) {
         as='nav'
         justifyContent='center'
         alignItems='center'
-        position='fixed'
+        position='sticky'
         top={0}
         px={2}
         py={4}
@@ -20,7 +20,7 @@ function DashboardShell({ children }) {
       >
         <Logo size={30} />
       </Flex>
-      <Flex direction='column' alignItems='center' minHeight='100vh' bg='gray.100' pt={16}>
+      <Flex direction='column' alignItems='center' minHeight='100vh' bg='gray.100'>
         {children}
       </Flex>
     </Flex>
