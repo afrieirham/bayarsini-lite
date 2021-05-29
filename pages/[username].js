@@ -40,7 +40,7 @@ function UserPayment({ user }) {
   const { handleSubmit, register } = useForm()
   const [loading, setLoading] = useState(false)
 
-  if (!user) return null
+  if (!user) return 'User not found'
 
   const { uid, username, name, photoUrl } = user ? user : null
 
