@@ -8,17 +8,13 @@ import { useAuth } from '@utils/auth'
 import { GoogleIcon } from '@styles/icons'
 
 export default function Home() {
-  const { signInWithGoogle, getRedirectResult } = useAuth()
+  const { signInWithGoogle } = useAuth()
   const [authLoading, setAuthLoading] = useState(false)
 
   const signIn = () => {
     setAuthLoading(true)
     signInWithGoogle()
   }
-
-  useEffect(() => {
-    getRedirectResult()
-  }, [getRedirectResult])
 
   return (
     <Flex

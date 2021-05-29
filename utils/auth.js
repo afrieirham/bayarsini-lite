@@ -44,17 +44,12 @@ function useAuthProvider() {
   }
 
   const signInWithGoogle = () => {
-    return firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
-  }
-
-  const getRedirectResult = () => {
     return firebase
       .auth()
-      .getRedirectResult()
-      .then((result) => {
-        if (result.user) {
-          Router.push('/home')
-        }
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then((response) => {
+        Router.push('/home')
+        handleUser(response.user)
       })
   }
 
@@ -62,7 +57,10 @@ function useAuthProvider() {
     return firebase
       .auth()
       .signOut()
-      .then(() => handleUser(false))
+      .then(() => {
+        Router.push('/')
+        handleUser(false)
+      })
   }
 
   // Watch the firebase auth state and update it accordingly
@@ -82,7 +80,6 @@ function useAuthProvider() {
     signOut,
     authLoading,
     signInWithGoogle,
-    getRedirectResult,
   }
 }
 
