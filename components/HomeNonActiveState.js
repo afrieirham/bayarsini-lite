@@ -16,7 +16,7 @@ import {
 import { ExternalLink } from 'react-feather'
 
 import { useAuth } from '@utils/auth'
-import { updateUserProfile } from '@utils/db'
+import { updateUserProfile, checkIfUsernameAvailable } from '@utils/db'
 import DashboardShell from './DashboardShell'
 
 function HomeNonActiveState() {
@@ -27,12 +27,26 @@ function HomeNonActiveState() {
 
   const [loading, setLoading] = useState(false)
 
-  const onSubmit = ({ username, toyyibpay }) => {
+  const onSubmit = async ({ username, toyyibpay }) => {
+    const isAvailable = await checkIfUsernameAvailable(username)
+
+    if (!isAvailable) {
+      return toast({
+        title: 'Sorry! Username is taken :(',
+        description: 'Please choose a different username.',
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        variant: 'subtle',
+        position: 'top',
+      })
+    }
+
     // Set loading state
     setLoading(true)
 
     // Save user data into db
-    updateUserProfile(user.uid, { username, toyyibpay })
+    updateUserProfile(user.uid, { username, toyyibpay, isActive: true })
 
     setTimeout(() => {
       // Set username in user state

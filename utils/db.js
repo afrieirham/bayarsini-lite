@@ -14,6 +14,11 @@ export async function getFirestoreUser(userId) {
   return user
 }
 
+export async function checkIfUsernameAvailable(username) {
+  const query = await firestore.collection('users').where('username', '==', username).get()
+  return query.empty
+}
+
 export function saveUser(user) {
   return firestore.collection('users').doc(user.uid).set(user, { merge: true })
 }
