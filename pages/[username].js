@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Flex, Heading, Text } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
-import { Input } from '@chakra-ui/input'
+import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/input'
 import { Avatar } from '@chakra-ui/avatar'
 
 import { createBill } from '@utils/toyyibpay'
@@ -111,14 +111,17 @@ function UserPayment({ user }) {
               <FormLabel fontWeight='bold' fontSize='sm'>
                 Amount
               </FormLabel>
-              <Input
-                placeholder='10.00'
-                autoComplete='off'
-                name='amount'
-                type='number'
-                step='.01'
-                {...register('amount', { required: true })}
-              />
+              <InputGroup>
+                <InputLeftAddon children='RM' />
+                <Input
+                  placeholder='10.00'
+                  autoComplete='off'
+                  name='amount'
+                  type='number'
+                  step='.01'
+                  {...register('amount', { required: true })}
+                />
+              </InputGroup>
             </FormControl>
             <FormControl mt={4}>
               <FormLabel fontWeight='bold' fontSize='sm'>

@@ -51,10 +51,10 @@ function Payment() {
             </Text>
           </Flex>
           <Heading color='green.400' my={8}>
-            {`RM${payment.amount}`}
+            {`RM${payment.amount.toFixed(2)}`}
           </Heading>
           <Text fontSize='sm'>
-            Transaction done on{' '}
+            Transaction made on{' '}
             <Text as='span' fontWeight='bold'>
               {format(parseISO(payment.paidAt), "d MMM, yyyy 'at' h:mma")}
             </Text>{' '}
