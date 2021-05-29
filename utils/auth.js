@@ -21,6 +21,7 @@ export const useAuth = () => {
 // React hook to give reuseable firebase auth function
 function useAuthProvider() {
   const [user, setUser] = useState(null)
+  const [authLoading, setAuthLoading] = useState(true)
 
   // Set user in state if logged in
   const handleUser = async (rawUser) => {
@@ -32,9 +33,9 @@ function useAuthProvider() {
       saveUser(userForFirestore)
 
       // Get extra user details to store in auth state
-      const { storeName, username } = await getFirestoreUser(user.uid)
+      const { username, isActive } = await getFirestoreUser(user.uid)
 
-      setUser({ ...user, storeName, username })
+      setUser({ ...user, username, isActive })
       return user
     } else {
       setUser(false)
@@ -66,7 +67,11 @@ function useAuthProvider() {
 
   // Watch the firebase auth state and update it accordingly
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => handleUser(user))
+    const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+      setAuthLoading(true)
+      await handleUser(user)
+      setAuthLoading(false)
+    })
 
     return () => unsubscribe()
   }, [])
@@ -75,6 +80,7 @@ function useAuthProvider() {
     user,
     setUser,
     signOut,
+    authLoading,
     signInWithGoogle,
     getRedirectResult,
   }

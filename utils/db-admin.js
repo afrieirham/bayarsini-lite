@@ -71,3 +71,22 @@ export async function getPayment(paymentId) {
   const payment = { id: doc.id, ...doc.data() }
   return { payment }
 }
+
+export async function getUserPayments(uid) {
+  const snapshot = await db
+    .collection('payments')
+    .where('receiverId', '==', uid)
+    .where('status', '==', 1)
+    .get()
+
+  const payments = []
+  snapshot.forEach((doc) => {
+    payments.push({ id: doc.id, ...doc.data() })
+  })
+
+  const sortedPayments = payments.sort((a, b) =>
+    compareDesc(parseISO(a.paidAt), parseISO(b.paidAt)),
+  )
+
+  return { payments: sortedPayments }
+}

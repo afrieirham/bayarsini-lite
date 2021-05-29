@@ -1,28 +1,26 @@
 import React from 'react'
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 
-import NavbarButton from './NavbarButton'
+import Logo from './Logo'
 
-function DashboardShell({ title, children }) {
+function DashboardShell({ children }) {
   return (
     <Flex direction='column'>
       <Flex
         as='nav'
         justifyContent='center'
         alignItems='center'
-        position='sticky'
+        position='fixed'
         top={0}
         px={2}
         py={4}
         bg='white'
         zIndex='10'
-        boxShadow='base'
         width='full'
       >
-        <NavbarButton position='absolute' left={2} />
-        <Text fontWeight='bold'>{title}</Text>
+        <Logo size={30} />
       </Flex>
-      <Flex direction='column' alignItems='center' minHeight='100vh' bg='gray.100'>
+      <Flex direction='column' alignItems='center' minHeight='100vh' bg='gray.100' pt={16}>
         {children}
       </Flex>
     </Flex>
