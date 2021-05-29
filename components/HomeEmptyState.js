@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, Flex, Heading, Text, useClipboard } from '@chakra-ui/react'
 import { Check, Copy } from 'react-feather'
 
 import { useAuth } from '@utils/auth'
 import DashboardShell from './DashboardShell'
 
-const origin = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_VERCEL_URL
-
 export default function HomeEmptyState() {
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
+  const [origin, setOrigin] = useState('')
   const { hasCopied, onCopy } = useClipboard(`${origin}/${user?.username}`)
+
+  useEffect(() => {
+    setOrigin(window.origin)
+  }, [window])
 
   return (
     <DashboardShell title='Home'>
@@ -60,6 +63,9 @@ export default function HomeEmptyState() {
             Get Payment Link
           </Button>
         )}
+        <Button mt={4} variant='ghost' onClick={() => signOut()}>
+          Logout
+        </Button>
       </Flex>
     </DashboardShell>
   )
