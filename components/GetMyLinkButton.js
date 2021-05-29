@@ -22,7 +22,7 @@ function GetMyLinkButton() {
         size='lg'
         fontSize='sm'
         variant='solid'
-        colorScheme='green'
+        colorScheme='gray'
       >
         Copied
       </Button>

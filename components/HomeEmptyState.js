@@ -1,11 +1,11 @@
 import React from 'react'
-import { Box, Button, Flex, Heading, Text, useClipboard } from '@chakra-ui/react'
+import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 
 import { useAuth } from '@utils/auth'
 import GetMyLinkButton from './GetMyLinkButton'
 
 export default function HomeEmptyState() {
-  const { user, signOut } = useAuth()
+  const { user } = useAuth()
 
   return (
     <>
@@ -27,9 +27,6 @@ export default function HomeEmptyState() {
           You have not receive any money. Share your link to request for payment.
         </Text>
         <GetMyLinkButton />
-        <Button mt={4} size='sm' variant='ghost' onClick={() => signOut()}>
-          Logout
-        </Button>
       </Flex>
     </>
   )

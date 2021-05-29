@@ -2,6 +2,7 @@ import React from 'react'
 import useSWR from 'swr'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
 import { Flex } from '@chakra-ui/layout'
+import { Button } from '@chakra-ui/button'
 
 import { useAuth } from '@utils/auth'
 import fetcher from '@utils/fetcher'
@@ -12,7 +13,7 @@ import PaymentHistory from '@components/PaymentHistory'
 import Loader from '@components/Loader'
 
 export default function Home() {
-  const { user, authLoading } = useAuth()
+  const { user, authLoading, signOut } = useAuth()
   const { data, error } = useSWR(user ? ['/api/payments', user.token] : null, fetcher)
 
   if (!user && !authLoading) {
@@ -52,8 +53,10 @@ export default function Home() {
               <HomeEmptyState />
             )}
           </TabPanel>
-          <TabPanel>
-            <p>two!</p>
+          <TabPanel p={0} as={Flex} direction='column' alignItems='center'>
+            <Button mt={4} size='sm' onClick={() => signOut()} variant='ghost'>
+              Logout
+            </Button>
           </TabPanel>
         </TabPanels>
       </Tabs>
