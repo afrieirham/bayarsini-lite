@@ -9,8 +9,7 @@ import { Avatar } from '@chakra-ui/avatar'
 
 import { createBill } from '@utils/toyyibpay'
 import { getAllUsers, getUserByUsername } from '@utils/db-admin'
-import PublicShell from '@components/PublicShell'
-import Logo from '@components/Logo'
+import DashboardShell from '@components/DashboardShell'
 
 export async function getStaticProps(context) {
   const { user } = await getUserByUsername(context.params.username)
@@ -78,7 +77,7 @@ function UserPayment({ user }) {
   }
 
   return (
-    <PublicShell>
+    <DashboardShell>
       <Flex direction='column' width='full' maxWidth='450px'>
         <Flex
           px={4}
@@ -176,10 +175,10 @@ function UserPayment({ user }) {
               Pay Now
             </Button>
           </Flex>
-          <Logo size={30} p={8} />
+          {/* <Logo size={30} p={8} /> */}
         </Flex>
       </Flex>
-    </PublicShell>
+    </DashboardShell>
   )
 }
 

@@ -5,8 +5,7 @@ import { format, parseISO } from 'date-fns'
 import { Flex, Heading, Text } from '@chakra-ui/layout'
 
 import fetcher from '@utils/fetcher'
-import PublicShell from '@components/PublicShell'
-import Logo from '@components/Logo'
+import DashboardShell from '@components/DashboardShell'
 
 function Payment() {
   const router = useRouter()
@@ -24,7 +23,7 @@ function Payment() {
   const { payment, receiver } = data
 
   return (
-    <PublicShell>
+    <DashboardShell>
       <Flex
         direction='column'
         width='full'
@@ -61,9 +60,8 @@ function Payment() {
             We’ve sent you the receipt to your email.
           </Text>
         </Flex>
-        <Logo size={30} p={8} />
       </Flex>
-    </PublicShell>
+    </DashboardShell>
   )
 }
 
