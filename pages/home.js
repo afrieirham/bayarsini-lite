@@ -6,6 +6,7 @@ import fetcher from '@utils/fetcher'
 import HomeNonActiveState from '@components/HomeNonActiveState'
 import HomeEmptyState from '@components/HomeEmptyState'
 import PaymentHistory from '@components/PaymentHistory'
+import Loader from '@components/Loader'
 
 export default function Home() {
   const { user, authLoading } = useAuth()
@@ -20,7 +21,7 @@ export default function Home() {
   }
 
   if (!data) {
-    return 'Loading...'
+    return <Loader />
   }
 
   if (!user.isActive) {

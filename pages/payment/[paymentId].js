@@ -6,6 +6,7 @@ import { Flex, Heading, Text } from '@chakra-ui/layout'
 
 import fetcher from '@utils/fetcher'
 import DashboardShell from '@components/DashboardShell'
+import Loader from '@components/Loader'
 
 function Payment() {
   const router = useRouter()
@@ -13,7 +14,7 @@ function Payment() {
   const { data, error } = useSWR(paymentId ? `/api/payment/${paymentId}` : null, fetcher)
 
   if (!data) {
-    return 'Loading...'
+    return <Loader />
   }
 
   if (error) {
@@ -30,7 +31,7 @@ function Payment() {
         maxWidth='450px'
         justifyContent='center'
         alignItems='center'
-        minHeight='100vh'
+        minHeight='90vh'
       >
         <Flex
           direction='column'

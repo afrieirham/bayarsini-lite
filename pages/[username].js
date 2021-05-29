@@ -175,7 +175,6 @@ function UserPayment({ user }) {
               Pay Now
             </Button>
           </Flex>
-          {/* <Logo size={30} p={8} /> */}
         </Flex>
       </Flex>
     </DashboardShell>

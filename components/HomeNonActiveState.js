@@ -50,7 +50,7 @@ function HomeNonActiveState() {
 
     setTimeout(() => {
       // Set username in user state
-      setUser({ ...user, username })
+      setUser({ ...user, username, isActive: true })
 
       // Alert user in UI
       toast({
