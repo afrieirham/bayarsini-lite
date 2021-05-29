@@ -28,7 +28,7 @@ export default function HomeEmptyState() {
           You have not receive any money. Share your link to request for payment.
         </Text>
         <GetMyLinkButton />
-        <Button mt={4} variant='ghost' onClick={() => signOut()}>
+        <Button mt={4} size='sm' variant='ghost' onClick={() => signOut()}>
           Logout
         </Button>
       </Flex>

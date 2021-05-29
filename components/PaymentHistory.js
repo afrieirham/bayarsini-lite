@@ -1,11 +1,13 @@
 import React from 'react'
 import { format, parseISO } from 'date-fns'
-import { Box, Flex, Heading, Spacer, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Spacer, Stack, Text } from '@chakra-ui/react'
 
+import { useAuth } from '@utils/auth'
 import DashboardShell from './DashboardShell'
 import GetMyLinkButton from './GetMyLinkButton'
 
 function PaymentHistory({ payments, user }) {
+  const { signOut } = useAuth()
   return (
     <DashboardShell>
       <Box maxWidth='450px' width='full' px={{ base: 4, sm: 0 }} py={8}>
@@ -25,6 +27,9 @@ function PaymentHistory({ payments, user }) {
           Share your link to request money.
         </Text>
         <GetMyLinkButton />
+        <Button mt={4} size='sm' variant='ghost' onClick={() => signOut()}>
+          Logout
+        </Button>
       </Flex>
       <Flex maxWidth='450px' width='full' direction='column' mt={8} pb={16}>
         <Heading size='md' mb={2} px={{ base: 4, sm: 0 }}>

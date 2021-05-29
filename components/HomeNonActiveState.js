@@ -22,7 +22,7 @@ import DashboardShell from './DashboardShell'
 function HomeNonActiveState() {
   const toast = useToast()
 
-  const { user, setUser } = useAuth()
+  const { user, setUser, signOut } = useAuth()
   const { handleSubmit, register } = useForm()
 
   const [loading, setLoading] = useState(false)
@@ -168,6 +168,9 @@ function HomeNonActiveState() {
             Confirm
           </Button>
         </Flex>
+        <Button my={4} variant='ghost' onClick={() => signOut()}>
+          Logout
+        </Button>
       </Flex>
     </DashboardShell>
   )
