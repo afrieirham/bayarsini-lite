@@ -26,7 +26,7 @@ function PaymentHistory({ payments, user }) {
         </Text>
         <GetMyLinkButton />
       </Flex>
-      <Flex maxWidth='450px' width='full' direction='column' mt={8}>
+      <Flex maxWidth='450px' width='full' direction='column' mt={8} pb={16}>
         <Heading size='md' mb={2} px={{ base: 4, sm: 0 }}>
           Payments Received 🥳
         </Heading>
