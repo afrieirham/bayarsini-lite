@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 import { Divider, Flex, Text } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
@@ -8,13 +9,20 @@ import { useAuth } from '@utils/auth'
 import { GoogleIcon } from '@styles/icons'
 
 export default function Home() {
-  const { signInWithGoogle } = useAuth()
-  const [authLoading, setAuthLoading] = useState(false)
+  const router = useRouter()
+  const { user, signInWithGoogle, authLoading } = useAuth()
+  const [loading, setLoading] = useState(false)
 
   const signIn = () => {
-    setAuthLoading(true)
+    setLoading(true)
     signInWithGoogle()
   }
+
+  useEffect(() => {
+    if (user && !authLoading) {
+      router.push('/home')
+    }
+  }, [user, authLoading, router])
 
   return (
     <Flex
@@ -36,7 +44,7 @@ export default function Home() {
         boxShadow='lg'
       >
         <Image src='/logo.svg' width={60} height={60} />
-        <Text fontSize='xl' fontWeight='bold' textAlign='center' mt={2}>
+        <Text fontSize='xl' fontWeight='medium' textAlign='center' mt={2}>
           BayarSini
         </Text>
         <Divider my={8} />
@@ -53,7 +61,7 @@ export default function Home() {
           _active={{ bg: 'gray.100' }}
           leftIcon={<GoogleIcon />}
           size='lg'
-          isLoading={authLoading}
+          isLoading={loading}
         >
           Continue with Google
         </Button>
