@@ -57,10 +57,7 @@ function useAuthProvider() {
     return firebase
       .auth()
       .signOut()
-      .then(() => {
-        Router.push('/')
-        handleUser(false)
-      })
+      .then(() => handleUser(false))
   }
 
   // Watch the firebase auth state and update it accordingly

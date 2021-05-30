@@ -1,6 +1,13 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
   Box,
   Button,
   Flex,
@@ -21,11 +28,15 @@ import DashboardShell from './DashboardShell'
 
 function HomeNonActiveState() {
   const toast = useToast()
+  const router = useRouter()
 
   const { user, setUser, signOut } = useAuth()
   const { handleSubmit, register } = useForm()
-
   const [loading, setLoading] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+
+  const onClose = () => setIsOpen(false)
+  const cancelRef = useRef()
 
   const onSubmit = async ({ username, toyyibpay }) => {
     const isAvailable = await checkIfUsernameAvailable(username)
@@ -109,18 +120,16 @@ function HomeNonActiveState() {
         </Text>
       </Flex>
       <Flex maxWidth='450px' width='full' direction='column' mt={8}>
-        <Text fontSize='xs' color='gray.500' textTransform='uppercase' px={4} mb={1}>
+        <Text
+          fontSize='xs'
+          color='gray.500'
+          textTransform='uppercase'
+          px={{ base: 4, sm: 0 }}
+          mb={1}
+        >
           Complete Profile
         </Text>
-        <Flex
-          direction='column'
-          bg='white'
-          p={4}
-          border='1px'
-          borderColor='gray.200'
-          as='form'
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <Flex direction='column' bg='white' p={4} border='1px' borderColor='gray.200' as='form'>
           <FormControl>
             <FormLabel fontSize='sm'>Username</FormLabel>
             <InputGroup>
@@ -153,7 +162,7 @@ function HomeNonActiveState() {
           </FormControl>
           <Button
             mt={6}
-            type='submit'
+            onClick={() => setIsOpen(true)}
             maxWidth='450px'
             width='full'
             fontSize='sm'
@@ -163,12 +172,49 @@ function HomeNonActiveState() {
             _hover={{ bg: 'gray.700' }}
             _focus={{ bg: 'gray.700' }}
             _active={{ bg: 'gray.800' }}
-            isLoading={loading}
           >
             Confirm
           </Button>
+          <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} isCentered>
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                  Confirm Complete Profile
+                </AlertDialogHeader>
+
+                <AlertDialogBody>Are you sure? You can't edit this afterwards.</AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button ref={cancelRef} onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    ml={3}
+                    type='submit'
+                    color='white'
+                    variant='solid'
+                    backgroundColor='gray.900'
+                    _hover={{ bg: 'gray.700' }}
+                    _focus={{ bg: 'gray.700' }}
+                    _active={{ bg: 'gray.800' }}
+                    isLoading={loading}
+                    onClick={handleSubmit(onSubmit)}
+                  >
+                    Confirm
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
         </Flex>
-        <Button my={4} variant='ghost' onClick={() => signOut()}>
+        <Button
+          my={4}
+          variant='ghost'
+          onClick={() => {
+            router.push('/')
+            signOut()
+          }}
+        >
           Logout
         </Button>
       </Flex>

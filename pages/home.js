@@ -1,5 +1,6 @@
 import React from 'react'
 import useSWR from 'swr'
+import { useRouter } from 'next/router'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
 import { Flex } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
@@ -13,6 +14,7 @@ import PaymentHistory from '@components/PaymentHistory'
 import Loader from '@components/Loader'
 
 export default function Home() {
+  const router = useRouter()
   const { user, authLoading, signOut } = useAuth()
   const { data, error } = useSWR(user ? ['/api/payments', user.token] : null, fetcher)
 
@@ -38,10 +40,10 @@ export default function Home() {
     <DashboardShell>
       <Tabs width='full' colorScheme='gray.900' variant='line' p={0} isFitted={false} isLazy>
         <TabList bg='white' as={Flex} justifyContent='center'>
-          <Tab textTransform='' fontSize='sm'>
+          <Tab fontWeight='bold' fontSize='sm'>
             Home
           </Tab>
-          <Tab textTransform='' fontSize='sm'>
+          <Tab fontWeight='bold' fontSize='sm'>
             Settings
           </Tab>
         </TabList>
@@ -54,7 +56,15 @@ export default function Home() {
             )}
           </TabPanel>
           <TabPanel p={0} as={Flex} direction='column' alignItems='center'>
-            <Button mt={4} size='sm' onClick={() => signOut()} variant='ghost'>
+            <Button
+              mt={4}
+              size='sm'
+              onClick={() => {
+                router.push('/')
+                signOut()
+              }}
+              variant='ghost'
+            >
               Logout
             </Button>
           </TabPanel>
