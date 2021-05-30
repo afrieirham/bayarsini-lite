@@ -44,6 +44,13 @@ const checkout = async (req, res) => {
 
     updatePayment(order_id, paymentInfo)
   }
+  if (Number(status) === 3) {
+    const paymentInfo = {
+      status: Number(status),
+    }
+
+    updatePayment(order_id, paymentInfo)
+  }
 
   return res.status(204)
 }
