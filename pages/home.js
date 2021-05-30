@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
@@ -18,9 +18,11 @@ export default function Home() {
   const { user, authLoading, signOut } = useAuth()
   const { data, error } = useSWR(user ? ['/api/payments', user.token] : null, fetcher)
 
-  if (!user && !authLoading) {
-    return 'No logged in user'
-  }
+  useEffect(() => {
+    if (!user && !authLoading) {
+      router.push('/')
+    }
+  }, [user, authLoading, router])
 
   if (error) {
     return 'error'
