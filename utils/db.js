@@ -19,7 +19,3 @@ export function saveUser(user) {
 export function updateUserProfile(userId, newValues) {
   return firestore.collection('users').doc(userId).update(newValues)
 }
-
-export function updateStore(userId, storeName) {
-  return firestore.collection('users').doc(userId).update({ storeName })
-}

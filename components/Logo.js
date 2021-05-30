@@ -6,8 +6,8 @@ function Logo({ size, ...props }) {
   return (
     <Flex alignItems='center' {...props}>
       <Image src='/logo.svg' alt='BayarSini logo' width={size} height={size} />
-      <Text ml={2} fontWeight='bold'>
-        Bayar Sini
+      <Text ml={2} fontWeight='500'>
+        BayarSini
       </Text>
     </Flex>
   )
