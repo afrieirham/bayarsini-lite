@@ -139,6 +139,24 @@ export default function Home() {
               <Link href='https://forms.gle/EzD5bFvHNf8C73nY6' isExternal>
                 Feedback
               </Link>
+              <Box as='span' mx={1}>
+                &middot;
+              </Box>
+              <Link
+                href='https://docs.google.com/document/u/4/d/e/2PACX-1vR9i-U_m3ZwtddP-JqSW7UwP7mAAbEY1CmftijRZQpE56R2gMpBMv8SVPkrNOmoc_pIhEYFQZXwEv6W/pub'
+                isExternal
+              >
+                Guide
+              </Link>
+              <Box as='span' mx={1}>
+                &middot;
+              </Box>
+              <Link
+                href='https://docs.google.com/document/u/4/d/e/2PACX-1vRZAZQJxjeotII-Adr485wnUu8192ra7gsFYkb6YW3hTdTQw76hDuTMumUaVnUjIDjBaS1yOlCH1cX4/pub'
+                isExternal
+              >
+                FAQs
+              </Link>
             </Flex>
           </Flex>
         </Flex>
