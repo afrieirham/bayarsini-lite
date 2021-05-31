@@ -17,6 +17,7 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  Link,
   Text,
   useToast,
 } from '@chakra-ui/react'
@@ -97,6 +98,18 @@ function HomeNonActiveState() {
         <Text mt={4} fontSize='sm' color='gray.500'>
           Create ToyyibPay account, and come back later to activate your account.
         </Text>
+        <Text mt={4} fontSize='sm' color='gray.500'>
+          You can refer our{' '}
+          <Link
+            as='a'
+            color='blue.500'
+            href='https://docs.google.com/document/u/4/d/e/2PACX-1vR9i-U_m3ZwtddP-JqSW7UwP7mAAbEY1CmftijRZQpE56R2gMpBMv8SVPkrNOmoc_pIhEYFQZXwEv6W/pub'
+            isExternal
+          >
+            registration guide
+          </Link>{' '}
+          to setup your account.
+        </Text>
         <Button
           mt={6}
           type='submit'
@@ -143,7 +156,7 @@ function HomeNonActiveState() {
             </InputGroup>
           </FormControl>
           <FormControl mt={4}>
-            <FormLabel fontSize='sm'>User Secret</FormLabel>
+            <FormLabel fontSize='sm'>ToyyibPay User Secret</FormLabel>
             <Input
               placeholder='xxxxxxxx-xxxx-xxxx-xxxxx-xxxxxxxxxxxx'
               autoComplete='off'
@@ -152,7 +165,7 @@ function HomeNonActiveState() {
             />
           </FormControl>
           <FormControl mt={4}>
-            <FormLabel fontSize='sm'>Category Code</FormLabel>
+            <FormLabel fontSize='sm'>ToyyibPay Category Code</FormLabel>
             <Input
               placeholder='xxxxxxxx'
               autoComplete='off'
