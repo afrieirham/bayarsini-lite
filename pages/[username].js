@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { NextSeo } from 'next-seo'
 import { useForm } from 'react-hook-form'
 import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Flex, Heading, Text } from '@chakra-ui/layout'
@@ -76,8 +77,20 @@ function UserPayment({ user }) {
     setLoading(false)
   }
 
+  const title = `${name} (@${username}) | BayarSini`
+  const url = `https://bayarsini.link/${username}`
+
   return (
     <DashboardShell>
+      <NextSeo
+        title={title}
+        canonical={url}
+        openGraph={{
+          title,
+          url,
+          images: null,
+        }}
+      />
       <Flex direction='column' width='full' maxWidth='450px'>
         <Flex
           px={4}
