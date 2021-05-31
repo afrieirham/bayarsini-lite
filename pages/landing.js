@@ -1,13 +1,21 @@
 import React from 'react'
 import NextLink from 'next/link'
-import { Flex, Text, Heading, Button, Box, Link, Image } from '@chakra-ui/react'
+import { Flex, Text, Heading, Button, Box, Link, Image, useBreakpointValue } from '@chakra-ui/react'
 
 import Logo from '@components/Logo'
 
 function Landing() {
+  const heading1Size = useBreakpointValue({ base: 'xl', lg: '2xl' })
+  const heading2Size = useBreakpointValue({ base: 'sm', md: 'md' })
+  const heroImage = useBreakpointValue({
+    base: '/screenshot.png',
+    md: '/screenshot-with-shapes.png',
+  })
+
   return (
     <Flex flexDirection='column' justifyContent='center' alignItems='center'>
       <Flex
+        as='header'
         width='full'
         alignItems='stretch'
         justifyContent='center'
@@ -37,14 +45,37 @@ function Landing() {
           </Flex>
         </Flex>
       </Flex>
-      <Flex width='full' justifyContent='center' height='76.3vh' bg='blackAlpha.50'>
-        <Flex width='full' maxWidth='1250px'>
-          <Flex width='50%' flexDirection='column' justifyContent='center'>
-            <Heading size='2xl'>Get paid with a link – effortlessly.</Heading>
-            <Heading mt={4} size='md' fontWeight='regular' color='gray.600'>
+      <Flex
+        width='full'
+        justifyContent='center'
+        minHeight='85vh'
+        bg='blackAlpha.50'
+        p={{ base: 4, sm: 8 }}
+      >
+        <Flex
+          width='full'
+          maxWidth='1250px'
+          direction={{ base: 'column', lg: 'row' }}
+          justifyContent='center'
+          alignItems='center'
+          textAlign={{ base: 'center', lg: 'left' }}
+        >
+          <Flex
+            width={{ base: 'full', lg: '50%' }}
+            flexDirection='column'
+            justifyContent='center'
+            py={{ base: 8, md: 16, lg: 0 }}
+          >
+            <Heading size={heading1Size}>Get paid with a link – effortlessly.</Heading>
+            <Heading
+              mt={{ base: 2, lg: 2 }}
+              size={heading2Size}
+              fontWeight='regular'
+              color='gray.600'
+            >
               Pick a username. Share your link. Get paid!
             </Heading>
-            <Flex alignItems='center' mt={8}>
+            <Flex alignItems='center' mt={8} justifyContent={{ base: 'center', lg: 'flex-start' }}>
               <NextLink href='/' passHref>
                 <Button
                   variant='solid'
@@ -52,6 +83,7 @@ function Landing() {
                   fontSize='sm'
                   variant='solid'
                   color='white'
+                  px={8}
                   backgroundColor='gray.900'
                   _hover={{ bg: 'gray.700' }}
                   _focus={{ bg: 'gray.700' }}
@@ -65,12 +97,25 @@ function Landing() {
               </Text>
             </Flex>
           </Flex>
-          <Flex width='50%' py={16} justifyContent='center'>
-            <Image src='/screenshot-with-shapes.png' />
+          <Flex
+            py={{ base: 0, lg: 16 }}
+            width={{ base: 'full', lg: '50%' }}
+            justifyContent='center'
+            alignItems='center'
+          >
+            <Image src={heroImage} maxHeight='650px' />
           </Flex>
         </Flex>
       </Flex>
-      <Flex width='full' justifyContent='center' backgroundColor='gray.800' height='15vh'>
+      <Flex
+        as='footer'
+        width='full'
+        justifyContent='center'
+        backgroundColor='gray.800'
+        py={8}
+        bottom={0}
+        position={{ base: 'static', lg: 'absolute' }}
+      >
         <Flex
           width='full'
           maxWidth='1250px'
@@ -87,11 +132,13 @@ function Landing() {
           >
             <Text>&copy; BayarSini 2021. All Rights Reserved.</Text>
             <Flex mt={1}>
-              <Link>Contact</Link>
+              <Link href='mailto:afrieirham@outlook.com'>Contact</Link>
               <Box as='span' mx={1}>
                 &middot;
               </Box>
-              <Link>Feedback</Link>
+              <Link href='https://forms.gle/EzD5bFvHNf8C73nY6' isExternal>
+                Feedback
+              </Link>
             </Flex>
           </Flex>
         </Flex>
