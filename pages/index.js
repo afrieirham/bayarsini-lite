@@ -1,70 +1,147 @@
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
+import React from 'react'
+import NextLink from 'next/link'
+import { Flex, Text, Heading, Button, Box, Link, Image, useBreakpointValue } from '@chakra-ui/react'
 
-import { Divider, Flex, Text } from '@chakra-ui/layout'
-import { Button } from '@chakra-ui/button'
-
-import { useAuth } from '@utils/auth'
-import { GoogleIcon } from '@styles/icons'
+import Logo from '@components/Logo'
 
 export default function Home() {
-  const router = useRouter()
-  const { user, signInWithGoogle, authLoading } = useAuth()
-  const [loading, setLoading] = useState(false)
-
-  const signIn = () => {
-    setLoading(true)
-    signInWithGoogle()
-  }
-
-  useEffect(() => {
-    if (user && !authLoading) {
-      router.push('/home')
-    }
-  }, [user, authLoading, router])
+  const heading1Size = useBreakpointValue({ base: 'xl', lg: '2xl' })
+  const heading2Size = useBreakpointValue({ base: 'sm', md: 'md' })
+  const heroImage = useBreakpointValue({
+    base: '/screenshot.png',
+    md: '/screenshot-with-shapes.png',
+  })
 
   return (
-    <Flex
-      direction='column'
-      alignItems='center'
-      justifyContent='center'
-      minHeight='100vh'
-      bg='gray.100'
-    >
+    <Flex flexDirection='column' justifyContent='center' alignItems='center'>
       <Flex
-        mt={4}
-        direction='column'
-        bg='white'
-        py={8}
-        px={4}
-        maxWidth='350'
-        width='90%'
-        borderRadius='md'
-        boxShadow='lg'
+        as='header'
+        width='full'
+        alignItems='stretch'
+        justifyContent='center'
+        backgroundColor='whiteAlpha.500'
+        boxShadow='md'
+        p={4}
       >
-        <Image src='/logo.svg' width={60} height={60} />
-        <Text fontSize='xl' fontWeight='medium' textAlign='center' mt={2}>
-          BayarSini
-        </Text>
-        <Divider my={8} />
-        <Text textAlign='center' mb={4}>
-          Sign in to get started 🚀
-        </Text>
-        <Button
-          onClick={signIn}
-          backgroundColor='white'
-          color='gray.900'
-          variant='outline'
-          h='50px'
-          _hover={{ bg: 'gray.100' }}
-          _active={{ bg: 'gray.100' }}
-          leftIcon={<GoogleIcon />}
-          size='lg'
-          isLoading={loading}
+        <Flex width='full' maxWidth='1250px' justifyContent='space-between'>
+          <Flex>
+            <Logo size={50} />
+          </Flex>
+          <Flex alignItems='center'>
+            <NextLink href='/login' passHref>
+              <Button
+                variant='solid'
+                fontSize='sm'
+                variant='solid'
+                color='white'
+                backgroundColor='gray.900'
+                _hover={{ bg: 'gray.700' }}
+                _focus={{ bg: 'gray.700' }}
+                _active={{ bg: 'gray.800' }}
+              >
+                Login
+              </Button>
+            </NextLink>
+          </Flex>
+        </Flex>
+      </Flex>
+      <Flex
+        width='full'
+        justifyContent='center'
+        minHeight='85vh'
+        bg='blackAlpha.50'
+        px={{ base: 4, sm: 8 }}
+      >
+        <Flex
+          width='full'
+          maxWidth='1250px'
+          direction={{ base: 'column', lg: 'row' }}
+          justifyContent='center'
+          alignItems='center'
+          textAlign={{ base: 'center', lg: 'left' }}
         >
-          Continue with Google
-        </Button>
+          <Flex
+            width={{ base: 'full', lg: '50%' }}
+            flexDirection='column'
+            justifyContent='center'
+            py={{ base: 8, lg: 0 }}
+          >
+            <Heading size={heading1Size}>Get paid with a link – effortlessly.</Heading>
+            <Heading
+              mt={{ base: 2, lg: 2 }}
+              size={heading2Size}
+              fontWeight='regular'
+              color='gray.600'
+            >
+              Pick a username. Share your link. Get paid!
+            </Heading>
+            <Flex alignItems='center' mt={8} justifyContent={{ base: 'center', lg: 'flex-start' }}>
+              <NextLink href='/login' passHref>
+                <Button
+                  variant='solid'
+                  size='lg'
+                  fontSize='sm'
+                  variant='solid'
+                  color='white'
+                  px={8}
+                  backgroundColor='gray.900'
+                  _hover={{ bg: 'gray.700' }}
+                  _focus={{ bg: 'gray.700' }}
+                  _active={{ bg: 'gray.800' }}
+                >
+                  Try Now
+                </Button>
+              </NextLink>
+              <Text ml={4} color='gray.700'>
+                – Psst, it's free!
+              </Text>
+            </Flex>
+          </Flex>
+          <Flex
+            py={{ base: 0, lg: 16 }}
+            width={{ base: 'full', lg: '50%' }}
+            justifyContent='center'
+            alignItems='center'
+          >
+            <Image src={heroImage} maxHeight='650px' />
+          </Flex>
+        </Flex>
+      </Flex>
+      <Flex
+        as='footer'
+        width='full'
+        justifyContent='center'
+        backgroundColor='gray.800'
+        py={8}
+        bottom={0}
+        position={{ base: 'static', xl: 'absolute' }}
+      >
+        <Flex
+          width='full'
+          maxWidth='1250px'
+          flexDirection='row'
+          justifyContent='center'
+          alignItems='center'
+        >
+          <Flex
+            flexDirection='column'
+            color='white'
+            fontSize='sm'
+            color='gray.400'
+            alignItems='center'
+          >
+            <Text>&copy; BayarSini 2021. All Rights Reserved.</Text>
+            <Flex mt={1}>
+              <Link href='mailto:afrieirham@outlook.com'>Contact</Link>
+              <Box as='span' mx={1}>
+                &middot;
+              </Box>
+              <Link href='https://forms.gle/EzD5bFvHNf8C73nY6' isExternal>
+                Feedback
+              </Link>
+            </Flex>
+          </Flex>
+        </Flex>
       </Flex>
     </Flex>
   )
