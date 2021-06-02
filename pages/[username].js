@@ -9,6 +9,7 @@ import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/input'
 import { Avatar } from '@chakra-ui/avatar'
 
 import { createBill } from '@utils/toyyibpay'
+import { trapSpacesForRequiredFields } from '@utils/helper'
 import { getAllUsers, getUserByUsername } from '@utils/db-admin'
 import DashboardShell from '@components/DashboardShell'
 
@@ -126,12 +127,15 @@ function UserPayment({ user }) {
               <InputGroup>
                 <InputLeftAddon children='RM' />
                 <Input
-                  placeholder='10.00'
+                  placeholder='Minimum RM1.00'
                   autoComplete='off'
                   name='amount'
                   type='number'
                   step='.01'
-                  {...register('amount', { required: true })}
+                  {...register('amount', {
+                    required: true,
+                    validate: trapSpacesForRequiredFields,
+                  })}
                 />
               </InputGroup>
             </FormControl>
@@ -143,7 +147,10 @@ function UserPayment({ user }) {
                 placeholder='Abdullah Ahmad'
                 autoComplete='off'
                 name='customerName'
-                {...register('customerName', { required: true })}
+                {...register('customerName', {
+                  required: true,
+                  validate: trapSpacesForRequiredFields,
+                })}
               />
             </FormControl>
             <FormControl mt={4}>
@@ -155,7 +162,10 @@ function UserPayment({ user }) {
                 autoComplete='off'
                 name='customerEmail'
                 type='email'
-                {...register('customerEmail', { required: true })}
+                {...register('customerEmail', {
+                  required: true,
+                  validate: trapSpacesForRequiredFields,
+                })}
               />
             </FormControl>
             <FormControl mt={4}>
@@ -167,7 +177,10 @@ function UserPayment({ user }) {
                 autoComplete='off'
                 name='customerPhone'
                 type='tel'
-                {...register('customerPhone', { required: true })}
+                {...register('customerPhone', {
+                  required: true,
+                  validate: trapSpacesForRequiredFields,
+                })}
               />
             </FormControl>
             <Button
