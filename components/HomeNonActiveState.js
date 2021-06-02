@@ -24,6 +24,7 @@ import {
 import { ExternalLink } from 'react-feather'
 
 import { useAuth } from '@utils/auth'
+import { trapSpacesForRequiredFields } from '@utils/helper'
 import { updateUserProfile, checkIfUsernameAvailable } from '@utils/db'
 import DashboardShell from './DashboardShell'
 
@@ -39,7 +40,13 @@ function HomeNonActiveState() {
   const onClose = () => setIsOpen(false)
   const cancelRef = useRef()
 
-  const onSubmit = async ({ username, toyyibpay }) => {
+  const onSubmit = async (data) => {
+    const username = data.username.trim()
+    const toyyibpay = {
+      userSecretKey: data.toyyibpay.userSecretKey.trim(),
+      categoryCode: data.toyyibpay.categoryCode.trim(),
+    }
+
     const isAvailable = await checkIfUsernameAvailable(username)
 
     if (!isAvailable) {
@@ -151,7 +158,10 @@ function HomeNonActiveState() {
                 placeholder='khairulamingbrand'
                 autoComplete='off'
                 name='username'
-                {...register('username', { required: true })}
+                {...register('username', {
+                  required: true,
+                  validate: trapSpacesForRequiredFields,
+                })}
               />
             </InputGroup>
           </FormControl>
@@ -161,7 +171,10 @@ function HomeNonActiveState() {
               placeholder='xxxxxxxx-xxxx-xxxx-xxxxx-xxxxxxxxxxxx'
               autoComplete='off'
               name='toyyibpay.userSecretKey'
-              {...register('toyyibpay.userSecretKey', { required: true })}
+              {...register('toyyibpay.userSecretKey', {
+                required: true,
+                validate: trapSpacesForRequiredFields,
+              })}
             />
           </FormControl>
           <FormControl mt={4}>
@@ -170,7 +183,10 @@ function HomeNonActiveState() {
               placeholder='xxxxxxxx'
               autoComplete='off'
               name='toyyibpay.categoryCode'
-              {...register('toyyibpay.categoryCode', { required: true })}
+              {...register('toyyibpay.categoryCode', {
+                required: true,
+                validate: trapSpacesForRequiredFields,
+              })}
             />
           </FormControl>
           <Button
