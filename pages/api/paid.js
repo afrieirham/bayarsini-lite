@@ -1,6 +1,5 @@
 import Cors from 'cors'
-import micro from 'micro'
-import formidable from 'formidable'
+import { IncomingForm } from 'formidable'
 
 import { updatePayment } from '@utils/db-admin'
 
@@ -25,15 +24,16 @@ const checkout = async (req, res) => {
   // Run the middleware
   await runMiddleware(req, res, cors)
 
-  const data = await new Promise((resolve, reject) => {
-    const form = new formidable.IncomingForm({ keepExtensions: true })
+  const { fields } = await new Promise((resolve, reject) => {
+    const form = new IncomingForm({ keepExtensions: true })
+
     form.parse(req, (err, fields, files) => {
       if (err) return reject(err)
       resolve({ fields, files })
     })
   })
 
-  const { status, order_id } = data.fields
+  const { status, order_id } = fields
 
   // status: 1 = success, 2 = pending, 3 = fail
   if (Number(status) === 1) {
@@ -52,7 +52,7 @@ const checkout = async (req, res) => {
     updatePayment(order_id, paymentInfo)
   }
 
-  return res.status(204)
+  return res.status(204).send()
 }
 
 export const config = {
@@ -61,4 +61,4 @@ export const config = {
   },
 }
 
-export default micro(checkout)
+export default checkout
