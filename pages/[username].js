@@ -11,6 +11,7 @@ import { Avatar } from '@chakra-ui/avatar'
 import { createBill } from '@utils/toyyibpay'
 import { trapSpacesForRequiredFields } from '@utils/helper'
 import { getAllUsers, getUserByUsername } from '@utils/db-admin'
+import * as gtag from '@utils/gtag'
 import DashboardShell from '@components/DashboardShell'
 
 export async function getStaticProps(context) {
@@ -74,6 +75,14 @@ function UserPayment({ user }) {
 
     // Redirect customer to toyyibpayu payment portal
     window.open(`${process.env.NEXT_PUBLIC_TOYYIBPAY_BASE_URL}/${billCode}`, '_parent')
+
+    // Log user click pay now
+    gtag.event({
+      action: 'customer_pay_now',
+      category: 'user',
+      label: 'Customer click pay now',
+      value: username,
+    })
 
     setLoading(false)
   }

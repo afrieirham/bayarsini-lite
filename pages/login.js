@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { Divider, Flex, Text } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
 
+import * as gtag from '@utils/gtag'
 import { useAuth } from '@utils/auth'
 import { GoogleIcon } from '@styles/icons'
 
@@ -16,6 +17,13 @@ export default function Login() {
   const signIn = () => {
     setLoading(true)
     signInWithGoogle()
+
+    gtag.event({
+      action: 'user_login',
+      category: 'login',
+      label: 'User logged in',
+      value: '',
+    })
   }
 
   useEffect(() => {

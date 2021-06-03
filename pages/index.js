@@ -3,6 +3,7 @@ import NextLink from 'next/link'
 import { Flex, Text, Heading, Button, Box, Link, Image, useBreakpointValue } from '@chakra-ui/react'
 
 import { FAQ, FeedbackLink, RegistrationGuide } from '@constants/Links'
+import * as gtag from '@utils/gtag'
 import Logo from '@components/Logo'
 
 export default function Home() {
@@ -39,6 +40,14 @@ export default function Home() {
                 _hover={{ bg: 'gray.700' }}
                 _focus={{ bg: 'gray.700' }}
                 _active={{ bg: 'gray.800' }}
+                onClick={() => {
+                  gtag.event({
+                    action: 'user_click_login',
+                    category: 'user_acquisition',
+                    label: 'User acquisition',
+                    value: 'login_button',
+                  })
+                }}
               >
                 Login
               </Button>
@@ -89,6 +98,14 @@ export default function Home() {
                   _hover={{ bg: 'gray.700' }}
                   _focus={{ bg: 'gray.700' }}
                   _active={{ bg: 'gray.800' }}
+                  onClick={() => {
+                    gtag.event({
+                      action: 'user_click_login',
+                      category: 'user_acquisition',
+                      label: 'User acquisition',
+                      value: 'try_now_button',
+                    })
+                  }}
                 >
                   Try Now
                 </Button>
@@ -133,23 +150,68 @@ export default function Home() {
           >
             <Text>&copy; BayarSini 2021. All Rights Reserved.</Text>
             <Flex mt={1}>
-              <Link href='mailto:afrieirham@outlook.com'>Contact</Link>
+              <Link
+                href='mailto:afrieirham@outlook.com'
+                onClick={() => {
+                  gtag.event({
+                    action: 'user_click_contact',
+                    category: 'external_link',
+                    label: 'Contact clicked',
+                    value: 'contact',
+                  })
+                }}
+              >
+                Contact
+              </Link>
               <Box as='span' mx={1}>
                 &middot;
               </Box>
-              <Link href={FeedbackLink} isExternal>
+              <Link
+                href={FeedbackLink}
+                isExternal
+                onClick={() => {
+                  gtag.event({
+                    action: 'user_click_feedback',
+                    category: 'external_link',
+                    label: 'Feedback form clicked',
+                    value: 'feedback_form',
+                  })
+                }}
+              >
                 Feedback
               </Link>
               <Box as='span' mx={1}>
                 &middot;
               </Box>
-              <Link href={RegistrationGuide} isExternal>
+              <Link
+                href={RegistrationGuide}
+                isExternal
+                onClick={() => {
+                  gtag.event({
+                    action: 'user_click_guide',
+                    category: 'external_link',
+                    label: 'Registration guide clicked',
+                    value: 'registration_guide',
+                  })
+                }}
+              >
                 Guide
               </Link>
               <Box as='span' mx={1}>
                 &middot;
               </Box>
-              <Link href={FAQ} isExternal>
+              <Link
+                href={FAQ}
+                isExternal
+                onClick={() => {
+                  gtag.event({
+                    action: 'user_click_FAQ',
+                    category: 'external_link',
+                    label: 'FAQ clicked',
+                    value: 'faq',
+                  })
+                }}
+              >
                 FAQs
               </Link>
             </Flex>
