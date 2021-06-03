@@ -23,8 +23,10 @@ import {
 } from '@chakra-ui/react'
 import { ExternalLink } from 'react-feather'
 
+import * as gtag from '@utils/gtag'
 import { useAuth } from '@utils/auth'
 import { trapSpacesForRequiredFields } from '@utils/helper'
+import { RegistrationGuide, ToyyibpayAffiliate } from '@constants/Links'
 import { updateUserProfile, checkIfUsernameAvailable } from '@utils/db'
 import DashboardShell from './DashboardShell'
 
@@ -81,7 +83,28 @@ function HomeNonActiveState() {
         variant: 'subtle',
         position: 'top',
       })
+
+      // Log user activate account event
+      gtag.event({
+        action: 'user_activation',
+        category: 'registration',
+        label: 'User activated',
+        value: username,
+      })
     }, 1000)
+  }
+
+  const onClickRegisterToyyibpay = () => {
+    // Log user click affiliate link
+    gtag.event({
+      action: 'click_affiliate_link',
+      category: 'registration',
+      label: 'Affiliate link clicked',
+      value: user.uid,
+    })
+
+    // Redirect user to ToyyibPay
+    window.open(ToyyibpayAffiliate)
   }
 
   return (
@@ -107,12 +130,7 @@ function HomeNonActiveState() {
         </Text>
         <Text mt={4} fontSize='sm' color='gray.500'>
           You can refer our{' '}
-          <Link
-            as='a'
-            color='blue.500'
-            href='https://docs.google.com/document/u/4/d/e/2PACX-1vR9i-U_m3ZwtddP-JqSW7UwP7mAAbEY1CmftijRZQpE56R2gMpBMv8SVPkrNOmoc_pIhEYFQZXwEv6W/pub'
-            isExternal
-          >
+          <Link as='a' color='blue.500' href={RegistrationGuide} isExternal>
             registration guide
           </Link>{' '}
           to setup your account.
@@ -130,7 +148,7 @@ function HomeNonActiveState() {
           _hover={{ bg: 'gray.700' }}
           _focus={{ bg: 'gray.700' }}
           _active={{ bg: 'gray.800' }}
-          onClick={() => window.open('https://toyyibpay.com/e/9168067289423942')}
+          onClick={onClickRegisterToyyibpay}
         >
           Register ToyyibPay
         </Button>
