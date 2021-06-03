@@ -2,6 +2,7 @@ import React from 'react'
 import NextLink from 'next/link'
 import { Flex, Text, Heading, Button, Box, Link, Image, useBreakpointValue } from '@chakra-ui/react'
 
+import { FAQ, FeedbackLink, RegistrationGuide } from '@constants/Links'
 import Logo from '@components/Logo'
 
 export default function Home() {
@@ -136,25 +137,19 @@ export default function Home() {
               <Box as='span' mx={1}>
                 &middot;
               </Box>
-              <Link href='https://forms.gle/EzD5bFvHNf8C73nY6' isExternal>
+              <Link href={FeedbackLink} isExternal>
                 Feedback
               </Link>
               <Box as='span' mx={1}>
                 &middot;
               </Box>
-              <Link
-                href='https://docs.google.com/document/u/4/d/e/2PACX-1vR9i-U_m3ZwtddP-JqSW7UwP7mAAbEY1CmftijRZQpE56R2gMpBMv8SVPkrNOmoc_pIhEYFQZXwEv6W/pub'
-                isExternal
-              >
+              <Link href={RegistrationGuide} isExternal>
                 Guide
               </Link>
               <Box as='span' mx={1}>
                 &middot;
               </Box>
-              <Link
-                href='https://docs.google.com/document/u/4/d/e/2PACX-1vRZAZQJxjeotII-Adr485wnUu8192ra7gsFYkb6YW3hTdTQw76hDuTMumUaVnUjIDjBaS1yOlCH1cX4/pub'
-                isExternal
-              >
+              <Link href={FAQ} isExternal>
                 FAQs
               </Link>
             </Flex>

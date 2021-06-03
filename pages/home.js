@@ -5,6 +5,7 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
 import { Flex, Heading, Link } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
 
+import { FAQ } from '@constants/Links'
 import { useAuth } from '@utils/auth'
 import fetcher from '@utils/fetcher'
 import DashboardShell from '@components/DashboardShell'
@@ -60,12 +61,7 @@ export default function Home() {
           <TabPanel p={0} as={Flex} direction='column' alignItems='center'>
             <Flex direction='column' width='full' maxWidth='450px' pt={8}>
               <Heading size='md'>Links</Heading>
-              <Link
-                mt={4}
-                color='blue.500'
-                href='https://docs.google.com/document/u/4/d/e/2PACX-1vRZAZQJxjeotII-Adr485wnUu8192ra7gsFYkb6YW3hTdTQw76hDuTMumUaVnUjIDjBaS1yOlCH1cX4/pub'
-                isExternal
-              >
+              <Link mt={4} color='blue.500' href={FAQ} isExternal>
                 FAQs
               </Link>
 
