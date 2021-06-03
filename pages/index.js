@@ -2,6 +2,8 @@ import React from 'react'
 import NextLink from 'next/link'
 import { Flex, Text, Heading, Button, Box, Link, Image, useBreakpointValue } from '@chakra-ui/react'
 
+import { FAQ, FeedbackLink, RegistrationGuide } from '@constants/Links'
+import * as gtag from '@utils/gtag'
 import Logo from '@components/Logo'
 
 export default function Home() {
@@ -38,6 +40,14 @@ export default function Home() {
                 _hover={{ bg: 'gray.700' }}
                 _focus={{ bg: 'gray.700' }}
                 _active={{ bg: 'gray.800' }}
+                onClick={() => {
+                  gtag.event({
+                    action: 'user_click_login',
+                    category: 'user_acquisition',
+                    label: 'User acquisition',
+                    value: 'login_button',
+                  })
+                }}
               >
                 Login
               </Button>
@@ -88,6 +98,14 @@ export default function Home() {
                   _hover={{ bg: 'gray.700' }}
                   _focus={{ bg: 'gray.700' }}
                   _active={{ bg: 'gray.800' }}
+                  onClick={() => {
+                    gtag.event({
+                      action: 'user_click_login',
+                      category: 'user_acquisition',
+                      label: 'User acquisition',
+                      value: 'try_now_button',
+                    })
+                  }}
                 >
                   Try Now
                 </Button>
@@ -132,19 +150,50 @@ export default function Home() {
           >
             <Text>&copy; BayarSini 2021. All Rights Reserved.</Text>
             <Flex mt={1}>
-              <Link href='mailto:afrieirham@outlook.com'>Contact</Link>
+              <Link
+                href='mailto:afrieirham@outlook.com'
+                onClick={() => {
+                  gtag.event({
+                    action: 'user_click_contact',
+                    category: 'external_link',
+                    label: 'Contact clicked',
+                    value: 'contact',
+                  })
+                }}
+              >
+                Contact
+              </Link>
               <Box as='span' mx={1}>
                 &middot;
               </Box>
-              <Link href='https://forms.gle/EzD5bFvHNf8C73nY6' isExternal>
+              <Link
+                href={FeedbackLink}
+                isExternal
+                onClick={() => {
+                  gtag.event({
+                    action: 'user_click_feedback',
+                    category: 'external_link',
+                    label: 'Feedback form clicked',
+                    value: 'feedback_form',
+                  })
+                }}
+              >
                 Feedback
               </Link>
               <Box as='span' mx={1}>
                 &middot;
               </Box>
               <Link
-                href='https://docs.google.com/document/u/4/d/e/2PACX-1vR9i-U_m3ZwtddP-JqSW7UwP7mAAbEY1CmftijRZQpE56R2gMpBMv8SVPkrNOmoc_pIhEYFQZXwEv6W/pub'
+                href={RegistrationGuide}
                 isExternal
+                onClick={() => {
+                  gtag.event({
+                    action: 'user_click_guide',
+                    category: 'external_link',
+                    label: 'Registration guide clicked',
+                    value: 'registration_guide',
+                  })
+                }}
               >
                 Guide
               </Link>
@@ -152,8 +201,16 @@ export default function Home() {
                 &middot;
               </Box>
               <Link
-                href='https://docs.google.com/document/u/4/d/e/2PACX-1vRZAZQJxjeotII-Adr485wnUu8192ra7gsFYkb6YW3hTdTQw76hDuTMumUaVnUjIDjBaS1yOlCH1cX4/pub'
+                href={FAQ}
                 isExternal
+                onClick={() => {
+                  gtag.event({
+                    action: 'user_click_FAQ',
+                    category: 'external_link',
+                    label: 'FAQ clicked',
+                    value: 'faq',
+                  })
+                }}
               >
                 FAQs
               </Link>
